@@ -1,17 +1,35 @@
 package com.ggstudio.clearsudoku;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainMenuActivity extends Activity {
+
+    private MainMenuFragment mainMenuFragment;
+    private NewGameFragment newGameFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        final FragmentManager fragmentManager = getFragmentManager();
+        final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        mainMenuFragment = new MainMenuFragment();
+        newGameFragment = new NewGameFragment();
+
+        fragmentTransaction.add(R.id.myContainer, mainMenuFragment);
+        fragmentTransaction.commit();
+
     }
 
 
@@ -33,4 +51,6 @@ public class MainMenuActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

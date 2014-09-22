@@ -9,8 +9,19 @@
     tools:context=".MainMenuActivity">
 
     <TextView
-        android:text="@string/hello_world"
+        android:text="Clear Sudoku"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="99dp"
+        android:id="@+id/textViewLogo" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/myContainer"
+        android:layout_below="@+id/textViewLogo"></FrameLayout>
 
 </RelativeLayout>
