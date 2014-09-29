@@ -2,6 +2,7 @@ package com.ggstudio.clearsudoku;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Button;
 public class MainMenuFragment extends Fragment {
 
     private Button buttonNewGame;
+    private Button buttonContinue;
     private NewGameFragment newGameFragment;
 
     public MainMenuFragment() {
@@ -26,6 +28,8 @@ public class MainMenuFragment extends Fragment {
         final View mainMenuFragment = inflater.inflate(R.layout.fragment_main_menu, container, false);
 
         buttonNewGame = (Button) mainMenuFragment.findViewById(R.id.buttonNewGame);
+        buttonContinue = (Button) mainMenuFragment.findViewById(R.id.buttonContinue);
+
         newGameFragment = new NewGameFragment();
 
         buttonNewGame.setOnClickListener(new View.OnClickListener() {
@@ -38,6 +42,16 @@ public class MainMenuFragment extends Fragment {
                 fragmentTransaction.commit();
             }
         });
+
+        buttonContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuFragment.this.getActivity(), GameActivity.class);
+                intent.putExtra("difficulty", "EASY");
+                startActivity(intent);
+            }
+        });
+
 
 
 

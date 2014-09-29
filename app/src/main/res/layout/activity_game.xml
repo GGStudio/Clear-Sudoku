@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <com.ggstudio.clearsudoku.GameView
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:background="@drawable/outer_border"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/gameView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textViewDifficulty"
+        android:layout_above="@+id/gameView"
+        android:layout_alignLeft="@+id/gameView"
+        android:layout_alignStart="@+id/gameView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textViewTime"
+        android:layout_above="@+id/gameView"
+        android:layout_alignRight="@+id/gameView"
+        android:layout_alignEnd="@+id/gameView" />
+
+</RelativeLayout>
