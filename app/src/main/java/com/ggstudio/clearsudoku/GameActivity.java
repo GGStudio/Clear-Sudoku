@@ -7,6 +7,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,8 @@ public class GameActivity extends Activity{
 
     private TextView textViewDifficulty, textViewTime, enterTextView;
     private String clue;
-    private GridLayout gridEnterLayout;
+    private RelativeLayout gridEnterLayout;
+    private RelativeLayout enterLayout;
     private Button button1,button2,button3,button4,button5,button6,button7,button8,button9,
     buttonInv,buttonOk,buttonC;
     public static TextView[][] textViews = new TextView[9][9];
@@ -32,8 +34,10 @@ public class GameActivity extends Activity{
 
         textViewDifficulty = (TextView) findViewById(R.id.textViewDifficulty);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
-        gridEnterLayout = (GridLayout) findViewById(R.id.gridEnterLayout);
-        gridEnterLayout.setVisibility(GridLayout.GONE);
+        gridEnterLayout = (RelativeLayout) findViewById(R.id.gridEnterLayout);
+        //gridEnterLayout.setVisibility(GridLayout.GONE);
+        enterLayout = (RelativeLayout) findViewById(R.id.enterLayout);
+        enterLayout.setVisibility(View.GONE);
 //        button1 = (Button) findViewById(R.id.button1);
 //        button2 = (Button) findViewById(R.id.button2);
 //        button3 = (Button) findViewById(R.id.button3);
@@ -75,36 +79,34 @@ public class GameActivity extends Activity{
             numberButtons[i].setOnClickListener(new NumberButtonClickListener());
         }
 
-        for (int i = 0; i < 9; i++){
-            for (int j = 0; j < 9; j++){
-                textViews[i][j].setText("V"+i+j);
-            }
-        }
+//        for (int i = 0; i < 9; i++){
+//            for (int j = 0; j < 9; j++){
+//                textViews[i][j].setText("V"+i+j);
+//            }
+//        }
 
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gridEnterLayout.setVisibility(View.GONE);
+                enterLayout.setVisibility(View.GONE);
             }
         });
 
         clue = getIntent().getExtras().getString("difficulty");
         textViewDifficulty.setText(clue);
 
-
     }
 
-
-
-    public class TextClickListener implements View.OnClickListener{
+    public class TextClickListener implements TextView.OnClickListener{
         public void onClick (View view){
 
-            TextView t1 = (TextView) view;
-            if (t1 != null){
-                //Toast.makeText(this,t1.getTag().toString(),Toast.LENGTH_SHORT).show();
-                ULTIMATE_BUFFER = t1.getTag().toString();
-                ULTIMATE_BUFFER_INT = t1.getId();
-                gridEnterLayout.setVisibility(View.VISIBLE);
+            TextView tView = (TextView) view;
+            if (view != null){
+                ULTIMATE_BUFFER = view.getTag().toString();
+                ULTIMATE_BUFFER_INT = view.getId();
+                enterTextView.setText(tView.getText());
+                enterLayout.setVisibility(View.VISIBLE);
+
             }
         }
     }
@@ -112,19 +114,25 @@ public class GameActivity extends Activity{
     public class NumberButtonClickListener implements View.OnClickListener{
         public void onClick (View view){
 
-            Button b1 = (Button) view;
-            if (b1 != null){
-                //Toast.makeText(this,t1.getTag().toString(),Toast.LENGTH_SHORT).show();
+            //int county = 0;
 
-
-
-
-                //TextView textTablo = (TextView) findViewById(R.id.enterTextView);
+            if (view != null){
                 TextView textTemp = (TextView) findViewById(ULTIMATE_BUFFER_INT);
-                enterTextView.setText(textTemp.getText());
-                gridEnterLayout.setVisibility(View.VISIBLE);
-                textTemp.setText(textTemp.getText() + b1.getTag().toString());
-                enterTextView.setText(enterTextView.getText() + b1.getTag().toString());
+
+                //enterLayout.setVisibility(View.VISIBLE);
+
+                textTemp.setText(textTemp.getText() + view.getTag().toString());
+                enterTextView.setText(enterTextView.getText() + view.getTag().toString());
+
+//                if (county++ == 0){
+//                    textTemp.setText(view.getTag().toString());
+//                    enterTextView.setText(enterTextView.getText() + view.getTag().toString());
+//
+//                } else {
+//                    textTemp.setText(view.getTag().toString() + "\n");
+//                    enterTextView.setText(enterTextView.getText() + " " + view.getTag().toString());
+//                }
+
             }
         }
     }
