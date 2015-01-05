@@ -44,7 +44,7 @@
 
         android:id="@+id/gridGameLayout"
 
-
+        android:layout_gravity="center"
 
         android:background="@drawable/game_background">
         <!--android:paddingTop="2dp"-->
