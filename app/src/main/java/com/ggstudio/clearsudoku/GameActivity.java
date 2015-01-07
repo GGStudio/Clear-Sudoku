@@ -1,23 +1,22 @@
 package com.ggstudio.clearsudoku;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AbsListView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.Transformation;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.GridView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +31,9 @@ public class GameActivity extends Activity{
     private RelativeLayout gridEnterLayout;
     private RelativeLayout enterLayout;
     private Button buttonInv,buttonOk,buttonC;
+    private Animation animationFadeIn, animationFadeOut, animationShrink;
     public static TextView[][] textViews = new TextView[9][9];
     public static Button[] numberButtons = new Button[9];
-    public static String ULTIMATE_BUFFER;
     public static int ULTIMATE_BUFFER_INT;
 
     public void onCreate (Bundle savedInstanceState){
@@ -55,10 +54,10 @@ public class GameActivity extends Activity{
         String s;
         int id;
 
-        // Creating game field
+        /** Creating game field. */
         createField(this, 9, 9);
 
-        // Initialize number buttons
+        /** Initialize number buttons. */
         for (int i=0;i<9;i++){
             s = "button" + (i+1);
             id = getResources().getIdentifier(s,"id", "com.ggstudio.clearsudoku");
@@ -67,22 +66,29 @@ public class GameActivity extends Activity{
             numberButtons[i].setOnClickListener(new NumberButtonClickListener());
         }
 
-        // OK button listener
+        /** OK button listener. */
         buttonOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enterLayout.startAnimation(animationFadeOut);
                 enterLayout.setVisibility(View.GONE);
             }
         });
 
-        //Set difficulty level
+        /** Set difficulty level. */
         clue = getIntent().getExtras().getString("difficulty");
         textViewDifficulty.setText(clue);
 
+        animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+
+        animationFadeIn.setAnimationListener(new AnimationFadeIn());
+        animationFadeOut.setAnimationListener(new AnimationFadeOut());
     }
 
     /** Method of creating GameField.*/
     public void createField(final Activity activity, final int columns, final int lines) {
+
         final GridView grid = (GridView) activity.findViewById(R.id.gridGameLayout);
         final List<Integer> nums = new ArrayList<Integer>(columns * lines);
 
@@ -101,34 +107,18 @@ public class GameActivity extends Activity{
             public void run() {
                 int width = grid.getMeasuredWidth();
                 int height = grid.getMeasuredHeight();
-
                 int oneWidth = width / columns;
                 int oneHeight = height / lines;
-
                 int oneSize = oneWidth > oneHeight ? oneHeight : oneWidth;
 
                 ViewGroup.LayoutParams par = grid.getLayoutParams();
                 par.width = (int) Math.floor((oneSize * columns) * 1.003 );
                 par.height = (int) Math.floor((oneSize * lines) * 1.007 );
 
-                final AdGrid adGrid = new AdGrid(activity,nums, oneSize);
-                grid.setAdapter(adGrid);
-                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                final GameViewAdapter gameViewAdapter = new GameViewAdapter(activity,nums, oneSize);
 
-                        TextView tView = (TextView) view;
-
-                        ULTIMATE_BUFFER = view.getTag().toString();
-                        ULTIMATE_BUFFER_INT = view.getId();
-
-                        if (view != null){
-                            enterTextView.setText(tView.getText());
-                            enterLayout.setVisibility(View.VISIBLE);
-
-                        }
-                    }
-                });
+                grid.setAdapter(gameViewAdapter);
+                grid.setOnItemClickListener(new GridViewItemClickListener());
                 grid.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
@@ -143,23 +133,9 @@ public class GameActivity extends Activity{
 
     }
 
-    // Old one listener. Consumed by adapter OnItemClickListener.
-//    public class TextClickListener implements TextView.OnClickListener{
-//        public void onClick (View view){
-//
-//            TextView tView = (TextView) view;
-//            if (view != null){
-//                ULTIMATE_BUFFER = view.getTag().toString();
-//                ULTIMATE_BUFFER_INT = view.getId();
-//                enterTextView.setText(tView.getText());
-//                enterLayout.setVisibility(View.VISIBLE);
-//
-//            }
-//        }
-//    }
-
-    /** NumPad click listener */
+    /** NumPad click listener. */
     public class NumberButtonClickListener implements View.OnClickListener{
+        @Override
         public void onClick (View view){
 
             if (view != null){
@@ -171,52 +147,53 @@ public class GameActivity extends Activity{
         }
     }
 
-    /** Adapter class for GridView element (GameField).*/
-    public class AdGrid extends BaseAdapter {
-
-        Activity ac;
-        List<Integer> nums;
-        int oneWidth;
-
-        AdGrid(Activity ac, List<Integer> nums, int oneWidth) {
-            this.ac = ac;
-            this.nums = nums;
-            this.oneWidth = oneWidth;
-        }
-
+    /** GridView on item click listener.*/
+    public class GridViewItemClickListener implements AdapterView.OnItemClickListener{
         @Override
-        public int getCount() {
-            return nums.size();
+        public void onItemClick (AdapterView<?> adapterView, View view, int position, long id){
+            TextView tView = (TextView) view;
+
+            ULTIMATE_BUFFER_INT = view.getId();
+            enterTextView.setText(tView.getText());
+            enterLayout.startAnimation(animationFadeIn);
+            enterLayout.setVisibility(View.VISIBLE);
         }
-
-        @Override
-        public Object getItem(int location) {
-            return nums.get(location);
-        }
-
-        @Override
-        public long getItemId(int arg0) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int location, View v, ViewGroup parent) {
-
-            int number = nums.get(location);
-
-            TextView tv = new TextView(ac);
-            GridView.LayoutParams par = new GridView.LayoutParams(oneWidth , oneWidth );
-
-            tv.setLayoutParams(par);
-            tv.setGravity(Gravity.CENTER);
-            tv.setTextSize(18);
-            tv.setId(nums.get(location));
-            tv.setTag(Integer.toString(nums.get(location)));
-
-            return tv;
-        }
-
     }
 
+    /** Animation fade in. */
+    public class AnimationFadeIn implements Animation.AnimationListener{
+        @Override
+        public void onAnimationStart(Animation animation){
+            enterLayout.startAnimation(animationFadeIn);
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation){
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation){
+
+        }
+    }
+
+    /** Animation fade out. */
+    public class AnimationFadeOut implements Animation.AnimationListener{
+        @Override
+        public void onAnimationStart(Animation animation){
+            enterLayout.startAnimation(animationFadeOut);
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation){
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation){
+
+        }
+    }
 
 }
