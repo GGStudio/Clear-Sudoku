@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ggstudio.clearsudoku.NewGameFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выбери сложность"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:id="@+id/textView" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Легко"
+        android:id="@+id/buttonEasy"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonModerate"
+        android:layout_below="@+id/buttonEasy"
+        android:layout_centerHorizontal="true"
+        android:text="Средне" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Тяжело"
+        android:id="@+id/buttonHard"
+        android:layout_below="@+id/buttonModerate"
+        android:layout_alignLeft="@+id/buttonModerate"
+        android:layout_alignStart="@+id/buttonModerate" />
+
+</RelativeLayout>
