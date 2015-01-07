@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:background="@drawable/activity_background">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/textViewDifficulty"
+            android:layout_above="@+id/gridGameLayout"
+            android:layout_alignLeft="@+id/gridGameLayout"
+            android:layout_alignStart="@+id/gridGameLayout" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/textViewTime"
+            android:layout_above="@+id/gridGameLayout"
+            android:layout_alignRight="@+id/gridGameLayout"
+            android:layout_alignEnd="@+id/gridGameLayout" />
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/gridGameLayout"
+            android:layout_gravity="center"
+            android:background="@drawable/game_background">
+
+        </GridView>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#50382D2D"
+        android:id="@+id/enterLayout"
+        android:animateLayoutChanges="true">
+
+        <RelativeLayout
+            android:layout_width="262dp"
+            android:layout_height="265dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="90dp"
+            android:layout_gravity="center"
+            android:paddingTop="3dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/gridEnterLayout"
+            android:background="@drawable/enter_border">
+
+            <TextView
+                android:id="@+id/enterTextView"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:background="@color/main_bg"
+                android:gravity="center" />
+
+            <GridLayout
+                android:layout_width="185dp"
+                android:layout_height="185dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:paddingTop="1dp"
+                android:paddingRight="1dp"
+                android:paddingBottom="1dp"
+                android:paddingLeft="1dp"
+
+
+                android:background="@drawable/numpad_background"
+                android:columnCount="3"
+                android:rowCount="3">
+
+
+                <Button android:text="1"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button1" />
+                <Button android:text="2"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+
+                    android:id="@+id/button2"/>
+                <Button android:text="3"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button3"/>
+
+                <Button android:text="4"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button4"/>
+                <Button android:text="5"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button5"/>
+                <Button android:text="6"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button6"/>
+
+                <Button android:text="7"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button7"/>
+                <Button android:text="8"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button8"/>
+                <Button android:text="9"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/button9"/>
+
+
+            </GridLayout>
+
+            <GridLayout
+                android:layout_width="61dp"
+                android:layout_height="185dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:paddingTop="1dp"
+                android:paddingRight="1dp"
+                android:paddingBottom="1dp"
+                android:paddingLeft="1dp"
+                android:background="@drawable/numpad_background_2"
+                android:columnCount="1">
+
+                <Button android:text="inv"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/buttonInv"/>
+
+                <Button android:text="C"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/buttonC"/>
+
+                <Button android:text="OK"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:background="@color/main_bg"
+                    android:id="@+id/buttonOk"/>
+            </GridLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/activity_background"
     tools:context="com.ggstudio.clearsudoku.NewGameFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,14 +14,14 @@
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"
         android:gravity="center"
-        android:id="@+id/textView" />
+        android:id="@+id/textViewDifficulty" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Легко"
         android:id="@+id/buttonEasy"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/textViewDifficulty"
         android:layout_centerHorizontal="true" />
 
     <Button
