@@ -14,6 +14,7 @@ public class SudokuField {
         createRows();
         createColumns();
         createGroups();
+        fillStartingValues();
     }
 
 
@@ -46,7 +47,11 @@ public class SudokuField {
         }
     }
     public void fillStartingValues(){
-        cells[1][2].setValue(5);
+        cells[0][2].setValue(5);
+        cells[0][5].setValue(4);
+        cells[0][8].setValue(9);
+        cells[6][2].setValue(1);
+        cells[6][5].setValue(3);
         cells[3][4].setValue(2);
     }
 

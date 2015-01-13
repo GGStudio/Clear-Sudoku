@@ -2,4 +2,5 @@
 <resources>
     <color name="main_bg">#fffffc</color>
     <color name="main_border">#494343</color>
+    <color name="starting_cell">#EDEDED</color>
 </resources>

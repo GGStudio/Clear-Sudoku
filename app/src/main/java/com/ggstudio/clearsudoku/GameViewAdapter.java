@@ -5,12 +5,17 @@ package com.ggstudio.clearsudoku;
  */
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
+
+import com.ggstudio.clearsudoku.engine.Enums;
+import com.ggstudio.clearsudoku.engine.Sudoku;
+
 import java.util.List;
 
 /** Adapter class for GridView element (GameField).*/
@@ -19,6 +24,7 @@ public class GameViewAdapter extends BaseAdapter {
     Activity ac;
     List<Integer> nums;
     int oneWidth;
+    Sudoku sudoku;
 
     GameViewAdapter(Activity ac, List<Integer> nums, int oneWidth) {
         this.ac = ac;
@@ -91,7 +97,7 @@ public class GameViewAdapter extends BaseAdapter {
                 break;
         }
 
-        //tv.setText(tv.getTag().toString());
+        tv.setText(Integer.toString(tv.getId()));
 
 
         return tv;

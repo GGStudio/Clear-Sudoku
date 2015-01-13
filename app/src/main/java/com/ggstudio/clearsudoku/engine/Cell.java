@@ -27,6 +27,14 @@ public class Cell {
         _count = 0;
     }
 
+    public String digitsToString(){
+        String s ="";
+        for (int i=0;i<digits.length;i++){
+            if (digits[i]) s+=i;
+        }
+        return  s;
+    }
+
     public void setState(CellState _state) {
         this._state = _state;
     }

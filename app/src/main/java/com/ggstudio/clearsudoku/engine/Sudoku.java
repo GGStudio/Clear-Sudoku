@@ -6,7 +6,7 @@ package com.ggstudio.clearsudoku.engine;
 import java.util.ArrayList;
 import com.ggstudio.clearsudoku.engine.Enums.*;
 public class Sudoku {
-    SudokuField field;
+    public SudokuField field;
     ArrayList<Move> moves;
     Complexity complexity;
     int turn =	0;

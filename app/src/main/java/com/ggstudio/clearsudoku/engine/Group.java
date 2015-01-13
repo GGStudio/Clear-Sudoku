@@ -47,16 +47,29 @@ public class Group {
         }
         return sum;
     }
+
     public boolean isAllUnique(){
         int[] availableDigitsInGroup = new int[9];
         for(int i=0;i<cells.length;i++){
-            availableDigitsInGroup[cells[i].getValue()]+=1;
+            if (cells[i].getState() == CellState.DEFINED)
+                availableDigitsInGroup[cells[i].getValue()]+=1;
         }
 
         boolean flag=true;
         for(int i=0; i<availableDigitsInGroup.length; i++){
-            if (availableDigitsInGroup[i]!=1)
+            if (availableDigitsInGroup[i]!=1 && availableDigitsInGroup[i]!=0)
                 flag=false;
+        }
+        return flag;
+    }
+
+    public boolean isAllDefined(){
+        boolean flag =true;
+        for(int i=0;i<cells.length;i++) {
+            if (cells[i].getState() != CellState.DEFINED){
+                flag=false;
+                return flag;
+            }
         }
         return flag;
     }
